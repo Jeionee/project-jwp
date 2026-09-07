@@ -1,5 +1,12 @@
+# Dependencies
 node_modules
-output.css
+
+# Environment
 .env
+
+# Build output
+output.css
+client/dist
+
+# Lock files (opsional, bisa di-track juga)
 package-lock.json
-package.json
