@@ -37,4 +37,4 @@ Dirancang dengan gaya antarmuka modern yang bersih (*clean minimalist UI* terins
 Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal di komputer Anda:
 1. **Clone repository ini:**
    ```bash
-   git clone [https://github.com/Jeionee/project-jwp.git](https://github.com/Jeionee/project-jwp.git)
+   git clone https://github.com/Jeionee/project-jwp.git
