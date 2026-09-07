@@ -1,5 +1,5 @@
 <div align="center">
-# 📊 Dashboard & Sistem CRUD Manajemen Pegawai
+📊 Dashboard & Sistem CRUD Manajemen Pegawai
 <p align="center"><b>Uji Kompetensi Keahlian / Proyek Jaringan Web & Pemrograman</b></p>
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
