@@ -10,3 +10,4 @@ client/dist
 
 # Lock files (opsional, bisa di-track juga)
 package-lock.json
+package.json 
