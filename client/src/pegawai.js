@@ -74,7 +74,7 @@ function renderTable(data) {
         ${isAdmin
           ? `<button data-edit="${emp.id}" class="text-sm font-medium text-slate-400 hover:text-blue-600 transition-colors">Edit</button>
              <button data-del="${emp.id}"  class="text-sm font-medium text-slate-400 hover:text-red-600 transition-colors">Hapus</button>`
-          : `<span class="text-xs text-slate-300 italic">Hanya lihat</span>`
+          : `<span class="text-slate-300">—</span>`
         }
       </td>
     </tr>`).join('');
@@ -97,7 +97,7 @@ function applyFilter() {
 on('searchInput', 'input', applyFilter);
 on('filterGender', 'change', applyFilter);
 
-// ── Modal Form (hanya admin) ──────────────────
+// ── Modal Form (Tambah untuk semua, Edit hanya admin) ────────────
 function openModal(title = 'Tambah Pegawai') {
   $('modalTitle').textContent = title;
   $('formError').classList.add('hidden');
@@ -105,14 +105,8 @@ function openModal(title = 'Tambah Pegawai') {
 }
 function closeModal() { $('modalForm').classList.add('hidden'); }
 
-// Tombol Tambah hanya aktif untuk admin
-if (isAdmin) {
-  on('btnTambah', 'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
-} else {
-  // Sembunyikan tombol Tambah untuk user biasa
-  const btnTambah = $('btnTambah');
-  if (btnTambah) btnTambah.style.display = 'none';
-}
+// Tombol Tambah aktif untuk semua user (admin & pegawai)
+on('btnTambah',     'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
 on('btnCloseModal', 'click', closeModal);
 on('btnBatal',      'click', closeModal);
 
