@@ -1,4 +1,5 @@
 <div align="center">
+<<<<<<< HEAD
 
 # 📊 Dashboard & Sistem CRUD Manajemen Pegawai
 
@@ -13,17 +14,27 @@
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 
+=======
+📊 Dashboard Kepegawaian & Sistem CRUD
+<p align="center"><b>Visualisasi data dan manajemen sistem pegawai.</b></p>
+
+>>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
 </div>
 
 ---
 
 ## 🌟 Tentang Proyek
+<<<<<<< HEAD
 
 Aplikasi web **full-stack** untuk manajemen data pegawai dengan fitur **CRUD (Create, Read, Update, Delete)** interaktif dan **Dashboard Visualisasi Data** berbasis grafik batang. Aplikasi menggunakan arsitektur client-server terpisah: frontend Vite + Tailwind CSS berkomunikasi dengan backend Express.js yang terhubung ke database MySQL.
+=======
+Proyek ini adalah sistem informasi manajemen data pegawai *full-stack* yang memisahkan arsitektur *client* dan *server*. Aplikasi ini menampilkan antarmuka modern yang bersih dengan judul "Dashboard Kepegawaian". Sistem ini dilengkapi dengan visualisasi data melalui grafik batang (*bar charts*) dan terhubung dengan basis data terpusat berbasis SQL.
+>>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
 
 ---
 
 ## ✨ Fitur Utama
+<<<<<<< HEAD
 
 - **📊 Dashboard Statistik Interaktif** — Grafik batang dinamis (Chart.js) untuk:
   - Komposisi gender pegawai (Laki-laki & Perempuan)
@@ -52,6 +63,28 @@ Aplikasi web **full-stack** untuk manajemen data pegawai dengan fitur **CRUD (Cr
 | Middleware | CORS | ^2.8.5 | Mengizinkan request lintas origin |
 | Konfigurasi | dotenv | ^16.4.5 | Manajemen environment variable |
 | Database | MySQL via XAMPP | — | Penyimpanan data persisten |
+=======
+- **📊 Dashboard Statistik Interaktif**: Menampilkan visualisasi data berupa grafik batang untuk:
+  - **Komposisi Gender**: Perbandingan jumlah Laki-laki dan Perempuan.
+  - **Pendidikan Terakhir**: Distribusi lulusan SMA/SMK, D3, S1, S2.
+  - **Distribusi Usia**: Dikelompokkan menjadi <25, 25-30, 31-40, >40 tahun.
+- **📈 Kartu KPI (Ringkasan Metrik)**: Menampilkan angka metrik secara cepat yang meliputi "Total Pegawai", "Laki-laki", "Perempuan", dan "Rata-rata Usia".
+- **📋 Direktori Pegawai**: Tabel daftar pegawai yang menampilkan kolom ID, Nama, Gender, Pendidikan, dan Usia.
+- **⚙️ Manajemen Data**: Terdapat tombol "Kelola Pegawai" untuk mengakses fitur pengelolaan data. 
+- **🔌 Arsitektur Full-Stack**: 
+  - Aplikasi dibagi menjadi direktori `client` untuk antarmuka pengguna dan direktori `server` untuk *backend API*.
+  - Terdapat *routing* khusus untuk entitas pegawai pada *backend* (`server/routes/pegawai.js`).
+  - Penyimpanan data menggunakan basis data SQL (`database/db_dashboard.sql`).
+
+---
+
+## 🛠️ Struktur Proyek
+Proyek ini menggunakan struktur direktori berikut[cite: 3]:
+
+- `client/`: Berisi kode *frontend* dengan konfigurasi dari *build tool* Vite (`vite.config.js`).
+- `server/`: Berisi kode *backend* Node.js, konfigurasi koneksi *database* (`db.js`), dan *routing* aplikasi.
+- `database/`: Berisi berkas SQL (`db_dashboard.sql`) untuk inisialisasi basis data.
+>>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
 
 ---
 
@@ -87,6 +120,7 @@ project-jwp/
 ---
 
 ## 🚀 Cara Menjalankan Proyek
+<<<<<<< HEAD
 
 ### Prasyarat
 
@@ -395,3 +429,19 @@ PORT=3000
 <div align="center">
 <p>Dibuat untuk keperluan <b>Uji Kompetensi Keahlian (UKK)</b></p>
 </div>
+=======
+Karena proyek ini menggunakan arsitektur *client-server*, Anda perlu menjalankan kedua sisi secara bersamaan.
+
+### 1. Persiapan Basis Data (Database)
+- Lakukan impor berkas `database/db_dashboard.sql` ke dalam sistem manajemen basis data SQL Anda (misal: MySQL/MariaDB).
+### 2. Menjalankan Server (Backend)
+1. Buka terminal dan masuk ke direktori `server`.
+   ```bash
+   cd server
+   node index.js
+### 3. Menjalankan Frontend
+1. Buka terminal yang baru dan masuk ke direktori `client`.
+   ```bash
+   cd client
+   npm run dev
+>>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
