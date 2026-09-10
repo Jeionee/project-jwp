@@ -200,7 +200,3 @@ npm run dev
 | Login gagal padahal password benar | Database belum memiliki user admin | Pastikan data dummy `admin` pada `db_dashboard.sql` sudah ter-insert |
 
 ---
-
-<div align="center">
-  <p>Dashboard Pendataan Pegawai &copy; 2026</p>
-</div>
