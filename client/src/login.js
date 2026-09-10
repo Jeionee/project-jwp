@@ -71,6 +71,8 @@ $('formLogin').addEventListener('submit', async (e) => {
       // Simpan sesi ke localStorage
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('username', json.data.username);
+      localStorage.setItem('name', json.data.name);
+      localStorage.setItem('role', json.data.role);
       // Arahkan ke dashboard
       window.location.replace('/');
     } else {

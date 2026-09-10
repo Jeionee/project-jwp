@@ -2,6 +2,9 @@ const API = '/api/pegawai';
 let allData = [];
 let deleteTargetId = null;
 
+// ── Role-based access ─────────────────────────
+const isAdmin = localStorage.getItem('role') === 'admin';
+
 // ── Helpers DOM ───────────────────────────────
 const $ = id => document.getElementById(id);
 const on = (id, ev, fn) => $(id).addEventListener(ev, fn);
@@ -56,7 +59,7 @@ function renderTable(data) {
     tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">Tidak ada data pegawai.</td></tr>';
     return;
   }
-  tbody.innerHTML = data.map((emp, index) => `
+  tbody.innerHTML = data.map((emp) => `
     <tr class="hover:bg-slate-50 transition-colors">
       <td class="px-6 py-4 text-slate-400">#${emp.id}</td>
       <td class="px-6 py-4 font-medium text-slate-800">${emp.name}</td>
@@ -68,14 +71,19 @@ function renderTable(data) {
       <td class="px-6 py-4 text-slate-600">${emp.education}</td>
       <td class="px-6 py-4 text-slate-600">${emp.age} Thn</td>
       <td class="px-6 py-4 text-right flex justify-end gap-3">
-        <button data-edit="${emp.id}" class="text-sm font-medium text-slate-400 hover:text-blue-600 transition-colors">Edit</button>
-        <button data-del="${emp.id}" class="text-sm font-medium text-slate-400 hover:text-red-600 transition-colors">Hapus</button>
+        ${isAdmin
+          ? `<button data-edit="${emp.id}" class="text-sm font-medium text-slate-400 hover:text-blue-600 transition-colors">Edit</button>
+             <button data-del="${emp.id}"  class="text-sm font-medium text-slate-400 hover:text-red-600 transition-colors">Hapus</button>`
+          : `<span class="text-xs text-slate-300 italic">Hanya lihat</span>`
+        }
       </td>
     </tr>`).join('');
 
-  // Event delegation untuk tombol Edit & Hapus
-  tbody.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => openEdit(+btn.dataset.edit)));
-  tbody.querySelectorAll('[data-del]').forEach(btn => btn.addEventListener('click', () => openHapus(+btn.dataset.del)));
+  // Event delegation — hanya pasang jika admin
+  if (isAdmin) {
+    tbody.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => openEdit(+btn.dataset.edit)));
+    tbody.querySelectorAll('[data-del]').forEach(btn  => btn.addEventListener('click', () => openHapus(+btn.dataset.del)));
+  }
 }
 
 // ── Filter ────────────────────────────────────
@@ -89,7 +97,7 @@ function applyFilter() {
 on('searchInput', 'input', applyFilter);
 on('filterGender', 'change', applyFilter);
 
-// ── Modal Form ────────────────────────────────
+// ── Modal Form (hanya admin) ──────────────────
 function openModal(title = 'Tambah Pegawai') {
   $('modalTitle').textContent = title;
   $('formError').classList.add('hidden');
@@ -97,9 +105,16 @@ function openModal(title = 'Tambah Pegawai') {
 }
 function closeModal() { $('modalForm').classList.add('hidden'); }
 
-on('btnTambah', 'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
+// Tombol Tambah hanya aktif untuk admin
+if (isAdmin) {
+  on('btnTambah', 'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
+} else {
+  // Sembunyikan tombol Tambah untuk user biasa
+  const btnTambah = $('btnTambah');
+  if (btnTambah) btnTambah.style.display = 'none';
+}
 on('btnCloseModal', 'click', closeModal);
-on('btnBatal', 'click', closeModal);
+on('btnBatal',      'click', closeModal);
 
 async function openEdit(id) {
   const res = await fetch(`${API}/${id}`);

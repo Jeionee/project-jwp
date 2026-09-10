@@ -33,12 +33,17 @@ INSERT INTO pegawai (name, gender, education, age) VALUES
 ('Hendra Gunawan',  'Laki-laki', 'D3',      27),
 ('Maya Putri',      'Perempuan', 'S2',      32);
 
--- Tabel Users (untuk login)
-CREATE TABLE IF NOT EXISTS users (
-  id       INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(50)  NOT NULL UNIQUE,
-  password VARCHAR(100) NOT NULL
+-- Tabel Users (untuk login & register)
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  id         INT AUTO_INCREMENT PRIMARY KEY,
+  name       VARCHAR(100) NOT NULL,
+  username   VARCHAR(50)  NOT NULL UNIQUE,
+  password   VARCHAR(100) NOT NULL,
+  role       ENUM('admin', 'user') NOT NULL DEFAULT 'user',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Akun default: admin / admin123
-INSERT IGNORE INTO users (username, password) VALUES ('admin', 'admin123');
+-- Akun admin (hanya admin yang bisa edit & hapus data)
+INSERT INTO users (name, username, password, role)
+VALUES ('Administrator', 'admin', 'admin123', 'admin');

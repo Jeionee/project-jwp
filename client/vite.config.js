@@ -5,9 +5,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main:    'index.html',
-        pegawai: 'pegawai.html',
-        login:   'login.html',
+        main:     'index.html',
+        pegawai:  'pegawai.html',
+        login:    'login.html',
+        register: 'register.html',
       },
     },
   },
