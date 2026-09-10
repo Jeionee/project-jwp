@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- Auth Guard: redirect ke login jika belum login -->
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.replace('/login.html');
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data Pegawai | Dashboard</title>
@@ -25,13 +31,28 @@
         <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Data Pegawai</h1>
         <p class="text-slate-500 mt-1 text-sm">Kelola data pegawai perusahaan.</p>
       </div>
-      <button id="btnTambah"
-        class="bg-brand text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors shadow-sm inline-flex items-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-        </svg>
-        Tambah Pegawai
-      </button>
+      <div class="flex items-center gap-3">
+        <!-- Info user yang sedang login -->
+        <span class="text-sm text-slate-500">
+          👤 <span id="usernameLabel" class="font-medium text-slate-700"></span>
+        </span>
+        <button id="btnTambah"
+          class="bg-brand text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors shadow-sm inline-flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          Tambah Pegawai
+        </button>
+        <!-- Tombol Logout -->
+        <button id="btnLogout"
+          class="px-4 py-2.5 rounded-lg text-sm font-medium border border-slate-300 text-slate-600 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors inline-flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          Logout
+        </button>
+      </div>
     </header>
 
     <!-- Stats -->
@@ -147,6 +168,34 @@
     </div>
   </div>
 
+  <!-- Modal Sukses Edit -->
+  <div id="modalSuksesEdit" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm text-center transform transition-all duration-300">
+      <!-- Ikon centang animasi -->
+      <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-emerald-100 mb-5">
+        <svg class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-slate-900 mb-1">Data Berhasil Diperbarui!</h3>
+      <p id="suksesEditNama" class="text-sm text-slate-500 mb-6">Perubahan data pegawai telah disimpan.</p>
+      <button id="btnTutupSuksesEdit"
+        class="w-full px-4 py-2.5 text-sm font-medium text-white bg-emerald-500 rounded-lg hover:bg-emerald-600 transition-colors">
+        OK, Mengerti
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Tampilkan username & handler logout
+    document.getElementById('usernameLabel').textContent =
+      localStorage.getItem('username') || 'admin';
+    document.getElementById('btnLogout').addEventListener('click', () => {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
+      window.location.replace('/login.html');
+    });
+  </script>
   <script type="module" src="/src/pegawai.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ import express   from 'express';
 import cors      from 'cors';
 import dotenv    from 'dotenv';
 import pegawaiRoutes from './routes/pegawai.js';
+import authRoutes    from './routes/auth.js';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());                // Parse body JSON
 
 // ── Routes ─────────────────────────────────
 app.use('/api/pegawai', pegawaiRoutes);
+app.use('/api/auth',    authRoutes);
 
 // Root endpoint (health check)
 app.get('/', (req, res) => {

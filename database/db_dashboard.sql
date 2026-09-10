@@ -32,3 +32,13 @@ INSERT INTO pegawai (name, gender, education, age) VALUES
 ('Dewi Lestari',    'Perempuan', 'S1',      30),
 ('Hendra Gunawan',  'Laki-laki', 'D3',      27),
 ('Maya Putri',      'Perempuan', 'S2',      32);
+
+-- Tabel Users (untuk login)
+CREATE TABLE IF NOT EXISTS users (
+  id       INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50)  NOT NULL UNIQUE,
+  password VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+-- Akun default: admin / admin123
+INSERT IGNORE INTO users (username, password) VALUES ('admin', 'admin123');

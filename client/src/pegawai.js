@@ -3,7 +3,7 @@ let allData = [];
 let deleteTargetId = null;
 
 // ── Helpers DOM ───────────────────────────────
-const $  = id => document.getElementById(id);
+const $ = id => document.getElementById(id);
 const on = (id, ev, fn) => $(id).addEventListener(ev, fn);
 
 // ── Toast ─────────────────────────────────────
@@ -18,7 +18,7 @@ function toast(msg, type = 'success') {
 // ── Fetch Data ────────────────────────────────
 async function load() {
   try {
-    const res  = await fetch(API);
+    const res = await fetch(API);
     const json = await res.json();
     allData = json.success ? json.data : [];
   } catch {
@@ -31,8 +31,8 @@ async function load() {
 
 // ── KPI ───────────────────────────────────────
 function renderKPIs() {
-  const total  = allData.length;
-  const pria   = allData.filter(e => e.gender === 'Laki-laki').length;
+  const total = allData.length;
+  const pria = allData.filter(e => e.gender === 'Laki-laki').length;
   const wanita = allData.filter(e => e.gender === 'Perempuan').length;
   $('kpiCards').innerHTML = `
     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
@@ -56,7 +56,7 @@ function renderTable(data) {
     tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">Tidak ada data pegawai.</td></tr>';
     return;
   }
-  tbody.innerHTML = data.map(emp => `
+  tbody.innerHTML = data.map((emp, index) => `
     <tr class="hover:bg-slate-50 transition-colors">
       <td class="px-6 py-4 text-slate-400">#${emp.id}</td>
       <td class="px-6 py-4 font-medium text-slate-800">${emp.name}</td>
@@ -75,7 +75,7 @@ function renderTable(data) {
 
   // Event delegation untuk tombol Edit & Hapus
   tbody.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => openEdit(+btn.dataset.edit)));
-  tbody.querySelectorAll('[data-del]').forEach(btn  => btn.addEventListener('click', () => openHapus(+btn.dataset.del)));
+  tbody.querySelectorAll('[data-del]').forEach(btn => btn.addEventListener('click', () => openHapus(+btn.dataset.del)));
 }
 
 // ── Filter ────────────────────────────────────
@@ -86,7 +86,7 @@ function applyFilter() {
     (!q || e.name.toLowerCase().includes(q)) && (!g || e.gender === g)
   ));
 }
-on('searchInput',  'input',  applyFilter);
+on('searchInput', 'input', applyFilter);
 on('filterGender', 'change', applyFilter);
 
 // ── Modal Form ────────────────────────────────
@@ -97,49 +97,56 @@ function openModal(title = 'Tambah Pegawai') {
 }
 function closeModal() { $('modalForm').classList.add('hidden'); }
 
-on('btnTambah',    'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
-on('btnCloseModal','click', closeModal);
-on('btnBatal',     'click', closeModal);
+on('btnTambah', 'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
+on('btnCloseModal', 'click', closeModal);
+on('btnBatal', 'click', closeModal);
 
 async function openEdit(id) {
-  const res  = await fetch(`${API}/${id}`);
+  const res = await fetch(`${API}/${id}`);
   const json = await res.json();
   if (!json.success) return toast('Data tidak ditemukan.', 'error');
   const emp = json.data;
-  $('empId').value     = emp.id;
-  $('empName').value   = emp.name;
+  $('empId').value = emp.id;
+  $('empName').value = emp.name;
   $('empGender').value = emp.gender;
-  $('empAge').value    = emp.age;
-  $('empEdu').value    = emp.education;
+  $('empAge').value = emp.age;
+  $('empEdu').value = emp.education;
   openModal('Edit Data Pegawai');
 }
 
 // ── Submit Form ───────────────────────────────
 on('formPegawai', 'submit', async (e) => {
   e.preventDefault();
-  const id   = $('empId').value;
+  const id = $('empId').value;
+  const namaP = $('empName').value.trim();
   const body = {
-    name:      $('empName').value.trim(),
-    gender:    $('empGender').value,
-    age:       parseInt($('empAge').value),
+    name: namaP,
+    gender: $('empGender').value,
+    age: parseInt($('empAge').value),
     education: $('empEdu').value,
   };
 
   const btn = $('btnSimpan');
   btn.textContent = 'Menyimpan...';
-  btn.disabled    = true;
+  btn.disabled = true;
 
-  const url    = id ? `${API}/${id}` : API;
+  const url = id ? `${API}/${id}` : API;
   const method = id ? 'PUT' : 'POST';
-  const res    = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-  const json   = await res.json();
+  const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const json = await res.json();
 
   btn.textContent = 'Simpan';
-  btn.disabled    = false;
+  btn.disabled = false;
 
   if (json.success) {
     closeModal();
-    toast(json.message);
+    if (id) {
+      // Mode Edit → tampilkan modal popup sukses
+      openSuksesEdit(namaP);
+    } else {
+      // Mode Tambah → cukup toast
+      toast(json.message);
+    }
     load();
   } else {
     $('formError').textContent = json.message;
@@ -147,14 +154,21 @@ on('formPegawai', 'submit', async (e) => {
   }
 });
 
+// ── Modal Sukses Edit ─────────────────────────
+function openSuksesEdit(namaP) {
+  $('suksesEditNama').textContent = `Data "${namaP}" telah berhasil diperbarui.`;
+  $('modalSuksesEdit').classList.remove('hidden');
+}
+on('btnTutupSuksesEdit', 'click', () => $('modalSuksesEdit').classList.add('hidden'));
+
 // ── Hapus ─────────────────────────────────────
 function openHapus(id) {
   deleteTargetId = id;
   $('modalHapus').classList.remove('hidden');
 }
-on('btnBatalHapus',   'click', () => $('modalHapus').classList.add('hidden'));
+on('btnBatalHapus', 'click', () => $('modalHapus').classList.add('hidden'));
 on('btnKonfirmHapus', 'click', async () => {
-  const res  = await fetch(`${API}/${deleteTargetId}`, { method: 'DELETE' });
+  const res = await fetch(`${API}/${deleteTargetId}`, { method: 'DELETE' });
   const json = await res.json();
   $('modalHapus').classList.add('hidden');
   toast(json.message, json.success ? 'success' : 'error');
