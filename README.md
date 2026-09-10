@@ -1,9 +1,5 @@
 <div align="center">
-<<<<<<< HEAD
-
-# 📊 Dashboard & Sistem CRUD Manajemen Pegawai
-
-<p align="center"><b>Uji Kompetensi Keahlian — Proyek Jaringan Web & Pemrograman</b></p>
+📊 Dashboard & Sistem CRUD Manajemen Pegawai
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -13,342 +9,68 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
-
-📊 Dashboard Kepegawaian & Sistem CRUD
-<p align="center"><b>Visualisasi data dan manajemen sistem pegawai.</b></p>
-
-931b433cb929629d07698a16d2d9b86150f4c21e
 </div>
 
 ---
 
-## 🌟 Tentang Proyek
-<<<<<<< HEAD
+🌟 Tentang Proyek
 
-Aplikasi web **full-stack** untuk manajemen data pegawai dengan fitur **CRUD (Create, Read, Update, Delete)** interaktif dan **Dashboard Visualisasi Data** berbasis grafik batang. Aplikasi menggunakan arsitektur client-server terpisah: frontend Vite + Tailwind CSS berkomunikasi dengan backend Express.js yang terhubung ke database MySQL.
-=======
-Proyek ini adalah sistem informasi manajemen data pegawai *full-stack* yang memisahkan arsitektur *client* dan *server*. Aplikasi ini menampilkan antarmuka modern yang bersih dengan judul "Dashboard Kepegawaian". Sistem ini dilengkapi dengan visualisasi data melalui grafik batang (*bar charts*) dan terhubung dengan basis data terpusat berbasis SQL.
->>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
+Aplikasi web **full-stack** ini dirancang untuk mempermudah manajemen data pegawai. Dengan mengusung arsitektur *client-server* yang terpisah, aplikasi ini memadukan **Frontend modern** (Vite + Tailwind CSS) dan **Backend yang tangguh** (Express.js + MySQL). Selain fitur **CRUD (Create, Read, Update, Delete)** yang interaktif, sistem ini dilengkapi dengan **Dashboard Visualisasi Data** berbasis metrik dan grafik untuk memberikan ringkasan informasi kepegawaian secara cepat dan akurat.
 
 ---
 
-## ✨ Fitur Utama
-<<<<<<< HEAD
+✨ Fitur Utama
 
-- **📊 Dashboard Statistik Interaktif** — Grafik batang dinamis (Chart.js) untuk:
-  - Komposisi gender pegawai (Laki-laki & Perempuan)
-  - Distribusi pendidikan terakhir (SMA/SMK, D3, S1, S2)
-  - Pengelompokan kategori usia pegawai
-- **📈 Kartu KPI Ringkasan** — Total pegawai, jumlah per gender, rata-rata usia
-- **📝 Sistem CRUD Lengkap** — Tambah, edit, dan hapus pegawai via modal form interaktif
-- **🔍 Pencarian & Filter Real-time** — Cari nama dan filter gender secara instan
-- **🔔 Toast Notification** — Feedback visual untuk setiap aksi (berhasil/gagal)
-- **🔒 Validasi Server-side** — Validasi input sebelum data disimpan ke database
+- **📊 Dashboard Statistik Interaktif** — Visualisasi data menggunakan *bar charts* dinamis (Chart.js) untuk memantau komposisi gender, distribusi pendidikan (SMA/SMK, D3, S1, S2), dan kelompok usia pegawai.
+- **📈 Kartu KPI (Key Performance Indicator)** — Ringkasan metrik instan yang menampilkan Total Pegawai, perbandingan Laki-laki & Perempuan, serta Rata-rata Usia.
+- **📋 Sistem CRUD & Direktori Lengkap** — Tabel daftar pegawai terpusat dengan fitur tambah, edit, dan hapus data melalui *modal form* interaktif tanpa perpindahan halaman.
+- **🔍 Pencarian & Filter Real-time** — Temukan data pegawai berdasarkan nama atau filter gender secara instan.
+- **🔔 Toast Notification & Validasi** — Memberikan *feedback* visual yang elegan setiap kali pengguna melakukan aksi (berhasil/gagal) dan dilengkapi perlindungan validasi data sisi server.
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+🛠️ Teknologi yang Digunakan
 
-| Kategori | Teknologi | Versi | Fungsi |
-|---|---|---|---|
-| Frontend | HTML5 | — | Struktur halaman web |
-| Frontend | Vanilla JavaScript ES6+ | — | Logika UI & interaksi pengguna |
-| Styling | Tailwind CSS | CDN | Framework CSS utility-first |
-| Library Grafik | Chart.js | ^4.4.3 | Visualisasi grafik batang interaktif |
-| Build Tool | Vite | ^5.3.4 | Dev server & module bundler |
-| Backend | Node.js | — | Runtime JavaScript sisi server |
-| Backend | Express.js | ^4.19.2 | HTTP framework & routing REST API |
-| Database Driver | mysql2 | ^3.10.1 | Koneksi MySQL berbasis Promise |
-| Middleware | CORS | ^2.8.5 | Mengizinkan request lintas origin |
-| Konfigurasi | dotenv | ^16.4.5 | Manajemen environment variable |
-| Database | MySQL via XAMPP | — | Penyimpanan data persisten |
-=======
-- **📊 Dashboard Statistik Interaktif**: Menampilkan visualisasi data berupa grafik batang untuk:
-  - **Komposisi Gender**: Perbandingan jumlah Laki-laki dan Perempuan.
-  - **Pendidikan Terakhir**: Distribusi lulusan SMA/SMK, D3, S1, S2.
-  - **Distribusi Usia**: Dikelompokkan menjadi <25, 25-30, 31-40, >40 tahun.
-- **📈 Kartu KPI (Ringkasan Metrik)**: Menampilkan angka metrik secara cepat yang meliputi "Total Pegawai", "Laki-laki", "Perempuan", dan "Rata-rata Usia".
-- **📋 Direktori Pegawai**: Tabel daftar pegawai yang menampilkan kolom ID, Nama, Gender, Pendidikan, dan Usia.
-- **⚙️ Manajemen Data**: Terdapat tombol "Kelola Pegawai" untuk mengakses fitur pengelolaan data. 
-- **🔌 Arsitektur Full-Stack**: 
-  - Aplikasi dibagi menjadi direktori `client` untuk antarmuka pengguna dan direktori `server` untuk *backend API*.
-  - Terdapat *routing* khusus untuk entitas pegawai pada *backend* (`server/routes/pegawai.js`).
-  - Penyimpanan data menggunakan basis data SQL (`database/db_dashboard.sql`).
+| Kategori | Teknologi | Kegunaan |
+|---|---|---|
+| **Frontend** | HTML5, JS (ES6+) | Struktur dan logika interaksi antarmuka pengguna |
+| **Styling** | Tailwind CSS | Framework CSS *utility-first* untuk desain responsif |
+| **Visualisasi**| Chart.js (^4.4.3) | Rendering grafik statistik interaktif |
+| **Build Tool** | Vite (^5.3.4) | *Development server* yang sangat cepat & *module bundler* |
+| **Backend** | Node.js, Express.js | Runtime JavaScript & Framework HTTP untuk REST API |
+| **Database** | MySQL (XAMPP) | Penyimpanan data persisten |
+| **Driver** | mysql2 (^3.10.1) | Koneksi MySQL berbasis Promise |
 
 ---
 
-## 🛠️ Struktur Proyek
-Proyek ini menggunakan struktur direktori berikut[cite: 3]:
+📁 Struktur Proyek
 
-- `client/`: Berisi kode *frontend* dengan konfigurasi dari *build tool* Vite (`vite.config.js`).
-- `server/`: Berisi kode *backend* Node.js, konfigurasi koneksi *database* (`db.js`), dan *routing* aplikasi.
-- `database/`: Berisi berkas SQL (`db_dashboard.sql`) untuk inisialisasi basis data.
->>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
-
----
-
-## 📁 Struktur Folder
+Aplikasi dibagi menjadi dua direktori utama: `client` untuk antarmuka pengguna dan `server` untuk *backend API*.
 
 ```
 project-jwp/
 │
-├── 📂 client/                    # Frontend (Vite)
+├── 📂 client/                    # Frontend (Antarmuka Pengguna)
 │   ├── index.html                # Halaman Dashboard utama
 │   ├── pegawai.html              # Halaman CRUD Manajemen Pegawai
-│   ├── vite.config.js            # Konfigurasi Vite (proxy API & multi-page)
-│   ├── package.json              # Dependensi frontend
+│   ├── vite.config.js            # Konfigurasi Vite
 │   └── 📂 src/
 │       ├── main.js               # Logika dashboard (KPI, charts, tabel preview)
-│       └── pegawai.js            # Logika CRUD (load, tambah, edit, hapus, filter)
+│       └── pegawai.js            # Logika CRUD (tambah, edit, hapus, filter)
 │
-├── 📂 server/                    # Backend (Express.js)
-│   ├── index.js                  # Entry point — middleware & route utama
+├── 📂 server/                    # Backend (REST API)
+│   ├── index.js                  # Entry point server (middleware & route)
 │   ├── db.js                     # Konfigurasi connection pool MySQL
-│   ├── .env                      # Kredensial database & port server
-│   ├── package.json              # Dependensi backend
+│   ├── .env                      # Kredensial environment variables
 │   └── 📂 routes/
 │       └── pegawai.js            # Route handler API CRUD pegawai
 │
-├── 📂 database/
-│   └── db_dashboard.sql          # Script SQL (buat DB, tabel, data dummy)
-│
-├── .gitignore
-└── README.md
+└── 📂 database/
+    └── db_dashboard.sql          # Script inisialisasi tabel & data dummy
 ```
-
 ---
 
-## 🚀 Cara Menjalankan Proyek
-<<<<<<< HEAD
-
-### Prasyarat
-
-Pastikan software berikut sudah terinstal di komputer Anda:
-
-- **Node.js** (v18 atau lebih baru) — [Download](https://nodejs.org)
-- **XAMPP** (for MySQL) — [Download](https://www.apachefriends.org)
-- **Git** — [Download](https://git-scm.com)
-
----
-
-### Langkah 1 — Clone Repository
-
-```bash
-git clone https://github.com/Jeionee/project-jwp.git
-cd project-jwp
-```
-
----
-
-### Langkah 2 — Setup Database (MySQL via XAMPP)
-
-1. Buka **XAMPP Control Panel**, klik **Start** pada `Apache` dan `MySQL`
-2. Buka browser, akses `http://localhost/phpmyadmin`
-3. Klik tab **SQL**, salin seluruh isi file `database/db_dashboard.sql`, tempel ke kolom SQL, lalu klik **Go**
-
-Script akan otomatis:
-- Membuat database `db_dashboard`
-- Membuat tabel `pegawai`
-- Memasukkan 8 data dummy awal
-
----
-
-### Langkah 3 — Konfigurasi Environment Backend
-
-Edit file `server/.env` sesuai konfigurasi MySQL Anda:
-
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=db_dashboard
-DB_USER=root
-DB_PASS=        # Kosongkan jika MySQL XAMPP tanpa password
-PORT=3000
-```
-
----
-
-### Langkah 4 — Jalankan Backend (Server Express)
-
-```bash
-cd server
-npm install
-node index.js
-```
-
-Output jika berhasil:
-
-```
-✅ MySQL terhubung ke database: db_dashboard
-🚀 Server berjalan di http://localhost:3000
-📋 API Pegawai: http://localhost:3000/api/pegawai
-```
-
----
-
-### Langkah 5 — Jalankan Frontend (Client Vite)
-
-Buka terminal **baru** (jangan tutup terminal server):
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
-Output jika berhasil:
-
-```
-  VITE v5.x.x  ready in ... ms
-  ➜  Local:   http://localhost:5173/
-```
-
----
-
-### Langkah 6 — Akses Aplikasi di Browser
-
-| Halaman | URL |
-|---|---|
-| 📊 Dashboard | `http://localhost:5173/` |
-| 👥 Manajemen Pegawai | `http://localhost:5173/pegawai.html` |
-
----
-
-## 📡 Dokumentasi API
-
-Base URL: `http://localhost:3000/api`
-
-| Method | Endpoint | Deskripsi | Status Sukses |
-|---|---|---|---|
-| `GET` | `/api/pegawai` | Ambil semua data pegawai | 200 OK |
-| `GET` | `/api/pegawai/:id` | Ambil satu pegawai berdasarkan ID | 200 OK |
-| `POST` | `/api/pegawai` | Tambah pegawai baru | 201 Created |
-| `PUT` | `/api/pegawai/:id` | Update data pegawai berdasarkan ID | 200 OK |
-| `DELETE` | `/api/pegawai/:id` | Hapus pegawai berdasarkan ID | 200 OK |
-
----
-
-#### `GET /api/pegawai` — Ambil semua pegawai
-
-**Response sukses (`200 OK`):**
-
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": 1,
-      "name": "Budi Santoso",
-      "gender": "Laki-laki",
-      "education": "S1",
-      "age": 28,
-      "created_at": "2026-09-10T10:00:00.000Z"
-    }
-  ]
-}
-```
-
----
-
-#### `GET /api/pegawai/:id` — Ambil satu pegawai
-
-**Response sukses (`200 OK`):**
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": 1,
-    "name": "Budi Santoso",
-    "gender": "Laki-laki",
-    "education": "S1",
-    "age": 28,
-    "created_at": "2026-09-10T10:00:00.000Z"
-  }
-}
-```
-
-**Response gagal (`404 Not Found`):**
-
-```json
-{ "success": false, "message": "Pegawai tidak ditemukan." }
-```
-
----
-
-#### `POST /api/pegawai` — Tambah pegawai baru
-
-**Request Body:**
-
-```json
-{
-  "name": "Nama Lengkap",
-  "gender": "Laki-laki",
-  "education": "S1",
-  "age": 25
-}
-```
-
-> Nilai valid: `gender` → `"Laki-laki"` atau `"Perempuan"` | `education` → `"SMA/SMK"`, `"D3"`, `"S1"`, `"S2"`
-
-**Response sukses (`201 Created`):**
-
-```json
-{
-  "success": true,
-  "message": "Pegawai berhasil ditambahkan.",
-  "data": { "id": 9 }
-}
-```
-
-**Response gagal validasi (`422`):**
-
-```json
-{ "success": false, "message": "Semua field wajib diisi." }
-```
-
----
-
-#### `PUT /api/pegawai/:id` — Update pegawai
-
-**Request Body:** sama seperti POST
-
-**Response sukses (`200 OK`):**
-
-```json
-{ "success": true, "message": "Data berhasil diperbarui." }
-```
-
----
-
-#### `DELETE /api/pegawai/:id` — Hapus pegawai
-
-**Response sukses (`200 OK`):**
-
-```json
-{ "success": true, "message": "Pegawai berhasil dihapus." }
-```
-
----
-
-## 🗄️ Skema Database
-
-**Database:** `db_dashboard` | **Engine:** InnoDB | **Charset:** utf8mb4
-
-### Tabel `pegawai`
-
-| Kolom | Tipe | Keterangan |
-|---|---|---|
-| `id` | `INT AUTO_INCREMENT PRIMARY KEY` | Identitas unik pegawai |
-| `name` | `VARCHAR(100) NOT NULL` | Nama lengkap pegawai |
-| `gender` | `ENUM('Laki-laki','Perempuan') NOT NULL` | Jenis kelamin |
-| `education` | `ENUM('SMA/SMK','D3','S1','S2') NOT NULL` | Pendidikan terakhir |
-| `age` | `INT NOT NULL` | Usia dalam tahun |
-| `created_at` | `TIMESTAMP DEFAULT CURRENT_TIMESTAMP` | Waktu data dibuat (otomatis) |
-
----
-
-## 🧩 Penjelasan Kode Program
+🧩 Penjelasan Kode Program
 
 ### `client/src/main.js` — Logika Halaman Dashboard
 
@@ -412,7 +134,7 @@ PORT=3000
 
 ---
 
-## 🔧 Troubleshooting
+🔧 Troubleshooting
 
 | Masalah | Penyebab | Solusi |
 |---|---|---|
@@ -425,10 +147,6 @@ PORT=3000
 
 ---
 
-<div align="center">
-<p>Dibuat untuk keperluan <b>Uji Kompetensi Keahlian (UKK)</b></p>
-</div>
-=======
 Karena proyek ini menggunakan arsitektur *client-server*, Anda perlu menjalankan kedua sisi secara bersamaan.
 
 ### 1. Persiapan Basis Data (Database)
@@ -443,4 +161,3 @@ Karena proyek ini menggunakan arsitektur *client-server*, Anda perlu menjalankan
    ```bash
    cd client
    npm run dev
->>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
