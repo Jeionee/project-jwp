@@ -14,11 +14,10 @@
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 
-=======
 📊 Dashboard Kepegawaian & Sistem CRUD
 <p align="center"><b>Visualisasi data dan manajemen sistem pegawai.</b></p>
 
->>>>>>> 931b433cb929629d07698a16d2d9b86150f4c21e
+931b433cb929629d07698a16d2d9b86150f4c21e
 </div>
 
 ---
