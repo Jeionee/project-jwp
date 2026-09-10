@@ -38,17 +38,29 @@ function renderKPIs() {
   const pria = allData.filter(e => e.gender === 'Laki-laki').length;
   const wanita = allData.filter(e => e.gender === 'Perempuan').length;
   $('kpiCards').innerHTML = `
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-      <p class="text-sm font-medium text-slate-500">Total Pegawai</p>
-      <p class="text-3xl font-bold text-slate-900 mt-1">${total}</p>
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Pegawai</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${total}</p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-emerald-600 font-semibold">Aktif</span>
+        <span>dalam database</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-      <p class="text-sm font-medium text-slate-500">Laki-laki</p>
-      <p class="text-3xl font-bold text-blue-600 mt-1">${pria}</p>
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Laki-laki</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${pria}</p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-blue-600 font-semibold">${total ? Math.round((pria / total) * 100) : 0}%</span>
+        <span>dari total</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-      <p class="text-sm font-medium text-slate-500">Perempuan</p>
-      <p class="text-3xl font-bold text-rose-500 mt-1">${wanita}</p>
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Perempuan</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${wanita}</p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-rose-500 font-semibold">${total ? Math.round((wanita / total) * 100) : 0}%</span>
+        <span>dari total</span>
+      </div>
     </div>`;
 }
 
@@ -56,33 +68,45 @@ function renderKPIs() {
 function renderTable(data) {
   const tbody = $('employeeTable');
   if (!data.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">Tidak ada data pegawai.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-400 text-xs">Tidak ada data pegawai yang cocok.</td></tr>';
     return;
   }
   tbody.innerHTML = data.map((emp) => `
-    <tr class="hover:bg-slate-50 transition-colors">
-      <td class="px-6 py-4 text-slate-400">#${emp.id}</td>
-      <td class="px-6 py-4 font-medium text-slate-800">${emp.name}</td>
+    <tr class="hover:bg-slate-50/80 transition-colors">
+      <td class="px-6 py-4 text-slate-400 font-mono text-xs font-medium">#${emp.id}</td>
       <td class="px-6 py-4">
-        <span class="px-2.5 py-1 rounded-full text-xs font-medium ${emp.gender === 'Laki-laki' ? 'bg-blue-50 text-blue-700' : 'bg-rose-50 text-rose-700'}">
+        <span class="font-semibold text-slate-800 text-sm">${emp.name}</span>
+      </td>
+      <td class="px-6 py-4">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${emp.gender === 'Laki-laki' ? 'bg-blue-50 text-blue-700 border border-blue-200/60' : 'bg-rose-50 text-rose-700 border border-rose-200/60'}">
           ${emp.gender}
         </span>
       </td>
-      <td class="px-6 py-4 text-slate-600">${emp.education}</td>
-      <td class="px-6 py-4 text-slate-600">${emp.age} Thn</td>
-      <td class="px-6 py-4 text-right flex justify-end gap-3">
+      <td class="px-6 py-4 text-slate-600 text-xs font-medium">
+        <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200/60">
+          ${emp.education}
+        </span>
+      </td>
+      <td class="px-6 py-4 text-slate-600 text-xs font-medium">${emp.age} Tahun</td>
+      <td class="px-6 py-4 text-right">
         ${isAdmin
-          ? `<button data-edit="${emp.id}" class="text-sm font-medium text-slate-400 hover:text-blue-600 transition-colors">Edit</button>
-             <button data-del="${emp.id}"  class="text-sm font-medium text-slate-400 hover:text-red-600 transition-colors">Hapus</button>`
-          : `<span class="text-slate-300">—</span>`
-        }
+      ? `<div class="flex justify-end items-center gap-2">
+               <button data-edit="${emp.id}" class="px-2.5 py-1 text-xs font-semibold text-emerald-700 hover:text-white bg-emerald-50 hover:bg-emerald-600 rounded-lg transition-colors border border-emerald-200/80">
+                 Edit
+               </button>
+               <button data-del="${emp.id}" class="px-2.5 py-1 text-xs font-semibold text-red-600 hover:text-white bg-red-50 hover:bg-red-600 rounded-lg transition-colors border border-red-200/60">
+                 Hapus
+               </button>
+             </div>`
+      : `<span class="text-slate-300 text-xs italic font-normal">Hanya Lihat</span>`
+    }
       </td>
     </tr>`).join('');
 
   // Event delegation — hanya pasang jika admin
   if (isAdmin) {
     tbody.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => openEdit(+btn.dataset.edit)));
-    tbody.querySelectorAll('[data-del]').forEach(btn  => btn.addEventListener('click', () => openHapus(+btn.dataset.del)));
+    tbody.querySelectorAll('[data-del]').forEach(btn => btn.addEventListener('click', () => openHapus(+btn.dataset.del)));
   }
 }
 
@@ -106,9 +130,9 @@ function openModal(title = 'Tambah Pegawai') {
 function closeModal() { $('modalForm').classList.add('hidden'); }
 
 // Tombol Tambah aktif untuk semua user (admin & pegawai)
-on('btnTambah',     'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
+on('btnTambah', 'click', () => { $('formPegawai').reset(); $('empId').value = ''; openModal(); });
 on('btnCloseModal', 'click', closeModal);
-on('btnBatal',      'click', closeModal);
+on('btnBatal', 'click', closeModal);
 
 async function openEdit(id) {
   const res = await fetch(`${API}/${id}`);

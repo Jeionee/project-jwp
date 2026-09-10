@@ -9,160 +9,210 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Kepegawaian</title>
+  <title>Dashboard Pegawai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { brand: '#0f172a' } } }
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        }
+      }
     }
   </script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.25s ease-out both; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+<body class="bg-slate-50/80 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <!-- ── Top Navbar Bersih ─────────────────────── -->
+  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Judul -->
+        <div>
+          <a href="/" class="font-bold text-lg tracking-tight text-slate-800 hover:text-emerald-600 transition">
+            Dashboard Pegawai
+          </a>
+        </div>
 
-    <!-- Header -->
-    <header class="mb-8 flex justify-between items-end">
+        <!-- Sisi Kanan: User Info & Actions -->
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <!-- Info User -->
+          <div class="flex items-center gap-2 bg-slate-100/80 border border-slate-200/70 px-3 py-1.5 rounded-xl text-xs">
+            <span id="usernameLabel" class="font-semibold text-slate-700 truncate max-w-[120px]"></span>
+            <span id="roleBadge" class="bg-emerald-100 text-emerald-800 font-medium px-2 py-0.5 rounded-md text-[10px]"></span>
+          </div>
+
+          <!-- Tombol Akses Kelola Pegawai (Admin) -->
+          <button id="btnKelolaPegawai"
+            class="bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-3.5 py-1.5 rounded-xl text-xs transition shadow-sm hover:shadow inline-flex items-center gap-1.5">
+            <span>Kelola Admin</span>
+          </button>
+
+          <!-- Tombol Logout -->
+          <button id="btnLogout"
+            title="Keluar"
+            class="p-2 sm:px-3 sm:py-1.5 rounded-xl text-xs font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 transition border border-slate-200 inline-flex items-center gap-1.5">
+            <span>Keluar</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Banner Sambutan Hijau Muda Segar ───────── -->
+  <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Dashboard Kepegawaian</h1>
-        <p class="text-slate-500 mt-1 text-sm">Visualisasi data dan manajemen sistem pegawai.</p>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Ringkasan Data Pegawai</h1>
+        <p class="text-emerald-50 text-sm mt-1">Pantau statistik dan demografi pegawai dengan mudah.</p>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Info user yang sedang login -->
-        <span class="text-sm text-slate-500">
-          👤 <span id="usernameLabel" class="font-medium text-slate-700"></span>
+        <span class="bg-white/15 backdrop-blur px-3 py-1.5 rounded-xl text-xs font-medium text-white border border-white/20">
+          <span id="currentDateText"></span>
         </span>
-        <!-- Tombol Kelola Pegawai (buka modal verifikasi admin) -->
-        <button id="btnKelolaPegawai"
-          class="bg-brand text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors shadow-sm inline-flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          Kelola Pegawai
-        </button>
-        <!-- Tombol Logout -->
-        <button id="btnLogout"
-          class="px-4 py-2.5 rounded-lg text-sm font-medium border border-slate-300 text-slate-600 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors inline-flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-          </svg>
-          Logout
-        </button>
+        <a href="/pegawai.html" class="bg-white text-emerald-800 hover:bg-emerald-50 px-3.5 py-1.5 rounded-xl text-xs font-semibold shadow-sm transition">
+          Lihat Semua Data &rarr;
+        </a>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <!-- KPI Cards -->
-    <div id="kpiCards" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-pulse h-24"></div>
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-pulse h-24"></div>
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-pulse h-24"></div>
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-pulse h-24"></div>
+  <!-- ── Konten Utama ──────────────────────────── -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- KPI Cards (diisi dinamis oleh main.js) -->
+    <div>
+      <div id="kpiCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm animate-pulse h-28"></div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm animate-pulse h-28"></div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm animate-pulse h-28"></div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm animate-pulse h-28"></div>
+      </div>
     </div>
 
-    <!-- Charts -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-        <h3 class="text-sm font-semibold text-slate-700 mb-4">Komposisi Gender</h3>
+    <!-- Grafik Visualisasi Data -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      
+      <!-- Gender Chart -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+          <h3 class="text-sm font-bold text-slate-800">Komposisi Gender</h3>
+          <span class="text-xs text-slate-400">Pria vs Wanita</span>
+        </div>
         <div class="relative h-56 w-full">
           <canvas id="genderChart"></canvas>
         </div>
       </div>
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-        <h3 class="text-sm font-semibold text-slate-700 mb-4">Pendidikan Terakhir</h3>
+
+      <!-- Education Chart -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+          <h3 class="text-sm font-bold text-slate-800">Pendidikan Terakhir</h3>
+          <span class="text-xs text-slate-400">Tingkat Edukasi</span>
+        </div>
         <div class="relative h-56 w-full">
           <canvas id="eduChart"></canvas>
         </div>
       </div>
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-        <h3 class="text-sm font-semibold text-slate-700 mb-4">Distribusi Usia</h3>
+
+      <!-- Age Chart -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+          <h3 class="text-sm font-bold text-slate-800">Distribusi Usia</h3>
+          <span class="text-xs text-slate-400">Rentang Umur</span>
+        </div>
         <div class="relative h-56 w-full">
           <canvas id="ageChart"></canvas>
         </div>
       </div>
+
     </div>
 
-    <!-- Table Preview -->
-    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-        <h2 class="text-base font-semibold text-slate-800">Direktori Pegawai</h2>
-        <a href="/pegawai.html" class="text-sm text-indigo-500 hover:text-indigo-600 font-medium">Lihat Semua →</a>
+    <!-- Table Preview (5 Data Terakhir) -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-bold text-slate-800">Daftar Pegawai Terbaru</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Menampilkan 5 pegawai yang terdaftar di sistem</p>
+        </div>
+        <a href="/pegawai.html" class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 hover:underline">
+          Buka Halaman Pegawai &rarr;
+        </a>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-left text-sm">
           <thead>
-            <tr class="text-slate-500 border-b border-slate-200 bg-slate-50">
-              <th class="px-6 py-4 font-medium">ID</th>
-              <th class="px-6 py-4 font-medium">Nama</th>
-              <th class="px-6 py-4 font-medium">Gender</th>
-              <th class="px-6 py-4 font-medium">Pendidikan</th>
-              <th class="px-6 py-4 font-medium">Usia</th>
+            <tr class="text-slate-500 border-b border-slate-100 bg-slate-50/60 text-xs font-semibold uppercase tracking-wider">
+              <th class="px-6 py-3.5">ID</th>
+              <th class="px-6 py-3.5">Nama</th>
+              <th class="px-6 py-3.5">Gender</th>
+              <th class="px-6 py-3.5">Pendidikan</th>
+              <th class="px-6 py-3.5">Usia</th>
             </tr>
           </thead>
           <tbody id="previewTable" class="divide-y divide-slate-100">
-            <tr><td colspan="5" class="px-6 py-8 text-center text-slate-400">Memuat data...</td></tr>
+            <tr>
+              <td colspan="5" class="px-6 py-8 text-center text-slate-400 text-xs">Memuat data...</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-  </div>
+  </main>
 
-  <!-- Modal Verifikasi Admin ──────────────────── -->
-  <div id="modalAdminVerify" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-7">
-      <!-- Header modal -->
-      <div class="flex items-center gap-3 mb-5">
-        <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-100">
-          <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="text-base font-semibold text-slate-900">Verifikasi Admin</h3>
-          <p class="text-xs text-slate-500">Masukkan kredensial admin untuk melanjutkan</p>
-        </div>
+  <!-- ── Footer Simpel ─────────────────────────── -->
+  <footer class="bg-white border-t border-slate-200/80 mt-auto py-5 text-center text-xs text-slate-500">
+    Dashboard Pendataan Pegawai &copy; 2026
+  </footer>
+
+  <!-- ── Modal Verifikasi Admin ────────────────── -->
+  <div id="modalAdminVerify" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full border border-slate-200/80 p-6 fade-in">
+      <div class="text-center mb-5">
+        <h3 class="font-bold text-lg text-slate-800">Verifikasi Akun Admin</h3>
+        <p class="text-slate-500 text-xs mt-1">Masukkan kredensial admin untuk mengakses fitur edit & hapus</p>
       </div>
 
-      <!-- Alert error -->
-      <div id="adminAlertError" class="hidden mb-4 text-sm text-red-600 bg-red-50 border border-red-200 px-3 py-2.5 rounded-lg flex items-center gap-2">
-        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-        <span id="adminAlertMsg">Username atau password salah.</span>
+      <!-- Alert Error -->
+      <div id="adminAlertError" class="hidden mb-4 flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-xs px-3 py-2.5 rounded-xl">
+        <span id="adminAlertMsg"></span>
       </div>
 
-      <!-- Form -->
-      <form id="formAdminVerify" class="space-y-3">
+      <form id="formAdminVerify" class="space-y-3.5" novalidate>
         <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Username Admin</label>
-          <input type="text" id="adminUsername" placeholder="Masukkan username admin"
-            autocomplete="off"
-            class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm
-                   focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent
-                   transition placeholder-slate-400" />
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Username Admin</label>
+          <input type="text" id="adminUsername" autocomplete="username" placeholder="Username admin"
+            class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition" />
         </div>
+
         <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Password Admin</label>
-          <input type="password" id="adminPassword" placeholder="Masukkan password admin"
-            autocomplete="off"
-            class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm
-                   focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent
-                   transition placeholder-slate-400" />
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Password Admin</label>
+          <input type="password" id="adminPassword" autocomplete="current-password" placeholder="Password admin"
+            class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition" />
         </div>
-        <div class="flex gap-2 pt-2">
+
+        <div class="pt-2 flex gap-2">
           <button type="button" id="btnBatalAdmin"
-            class="flex-1 px-4 py-2 text-sm font-medium border border-slate-300 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors">
+            class="flex-1 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition border border-slate-200">
             Batal
           </button>
           <button type="submit" id="btnMasukAdmin"
-            class="flex-1 px-4 py-2 text-sm font-medium text-white bg-amber-500 rounded-lg hover:bg-amber-600 transition-colors flex items-center justify-center gap-2">
-            <span id="adminBtnText">Masuk sebagai Admin</span>
-            <svg id="adminSpinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-semibold transition shadow-sm inline-flex items-center justify-center gap-1.5">
+            <span id="adminBtnText">Masuk Admin</span>
+            <svg id="adminSpinner" class="hidden w-3.5 h-3.5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
             </svg>
@@ -172,10 +222,30 @@
     </div>
   </div>
 
+  <!-- ── Script Interaksi Halaman ──────────────── -->
   <script>
-    // Tampilkan username & handler logout
-    document.getElementById('usernameLabel').textContent =
-      localStorage.getItem('username') || 'admin';
+    // Tanggal
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const today = new Date().toLocaleDateString('id-ID', options);
+    const dateEl = document.getElementById('currentDateText');
+    if (dateEl) dateEl.textContent = today;
+
+    // Info User Login
+    const username = localStorage.getItem('username') || 'Pengguna';
+    const role     = localStorage.getItem('role') || 'pegawai';
+    const name     = localStorage.getItem('name') || username;
+    
+    document.getElementById('usernameLabel').textContent = name;
+    const roleBadge = document.getElementById('roleBadge');
+    if (role === 'admin') {
+      roleBadge.textContent = 'Admin';
+      roleBadge.className = 'bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded-md text-[10px]';
+    } else {
+      roleBadge.textContent = 'Pegawai';
+      roleBadge.className = 'bg-emerald-100 text-emerald-800 font-medium px-2 py-0.5 rounded-md text-[10px]';
+    }
+
+    // Logout
     document.getElementById('btnLogout').addEventListener('click', () => {
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('username');
@@ -184,11 +254,15 @@
       window.location.replace('/login.html');
     });
 
-    // ── Modal Verifikasi Admin ────────────────
+    // Modal Admin
     const modalAdminVerify = document.getElementById('modalAdminVerify');
     const adminAlertError  = document.getElementById('adminAlertError');
 
     function openAdminModal() {
+      if (localStorage.getItem('role') === 'admin') {
+        window.location.href = '/pegawai.html';
+        return;
+      }
       document.getElementById('adminUsername').value = '';
       document.getElementById('adminPassword').value = '';
       adminAlertError.classList.add('hidden');
@@ -202,12 +276,10 @@
     document.getElementById('btnKelolaPegawai').addEventListener('click', openAdminModal);
     document.getElementById('btnBatalAdmin').addEventListener('click', closeAdminModal);
 
-    // Tutup modal saat klik backdrop
     modalAdminVerify.addEventListener('click', (e) => {
       if (e.target === modalAdminVerify) closeAdminModal();
     });
 
-    // Submit verifikasi
     document.getElementById('formAdminVerify').addEventListener('submit', async (e) => {
       e.preventDefault();
       adminAlertError.classList.add('hidden');
@@ -221,12 +293,11 @@
         return;
       }
 
-      // Loading state
       const btn     = document.getElementById('btnMasukAdmin');
       const btnText = document.getElementById('adminBtnText');
       const spinner = document.getElementById('adminSpinner');
       btn.disabled        = true;
-      btnText.textContent = 'Memverifikasi...';
+      btnText.textContent = 'Memeriksa...';
       spinner.classList.remove('hidden');
 
       try {
@@ -238,13 +309,12 @@
         const json = await res.json();
 
         if (json.success && json.data.role === 'admin') {
-          // Simpan role admin, lalu navigasi ke halaman kelola
           localStorage.setItem('role', 'admin');
           localStorage.setItem('username', json.data.username);
           localStorage.setItem('name', json.data.name);
           window.location.href = '/pegawai.html';
         } else if (json.success && json.data.role !== 'admin') {
-          document.getElementById('adminAlertMsg').textContent = 'Akun ini bukan admin. Gunakan akun admin.';
+          document.getElementById('adminAlertMsg').textContent = 'Akun ini bukan admin.';
           adminAlertError.classList.remove('hidden');
         } else {
           document.getElementById('adminAlertMsg').textContent = json.message || 'Username atau password salah.';
@@ -255,7 +325,7 @@
         adminAlertError.classList.remove('hidden');
       } finally {
         btn.disabled        = false;
-        btnText.textContent = 'Masuk sebagai Admin';
+        btnText.textContent = 'Masuk Admin';
         spinner.classList.add('hidden');
       }
     });

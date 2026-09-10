@@ -21,21 +21,40 @@ function renderKPIs(data) {
     : 0;
 
   document.getElementById('kpiCards').innerHTML = `
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <p class="text-sm font-medium text-slate-500">Total Pegawai</p>
-      <p class="text-3xl font-bold text-slate-900 mt-1">${total}</p>
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Pegawai</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${total}</p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-emerald-600 font-semibold">100%</span>
+        <span>terdaftar di sistem</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <p class="text-sm font-medium text-slate-500">Laki-laki</p>
-      <p class="text-3xl font-bold text-blue-600 mt-1">${pria}</p>
+
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Laki-laki</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${pria}</p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-blue-600 font-semibold">${total ? Math.round((pria / total) * 100) : 0}%</span>
+        <span>dari total pegawai</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <p class="text-sm font-medium text-slate-500">Perempuan</p>
-      <p class="text-3xl font-bold text-rose-500 mt-1">${wanita}</p>
+
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Perempuan</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${wanita}</p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-rose-500 font-semibold">${total ? Math.round((wanita / total) * 100) : 0}%</span>
+        <span>dari total pegawai</span>
+      </div>
     </div>
-    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <p class="text-sm font-medium text-slate-500">Rata-rata Usia</p>
-      <p class="text-3xl font-bold text-emerald-600 mt-1">${avgAge} <span class="text-base font-normal text-slate-400">Thn</span></p>
+
+    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Rata-rata Usia</span>
+      <p class="text-3xl font-extrabold text-slate-800 mt-2">${avgAge} <span class="text-sm font-normal text-slate-400">Tahun</span></p>
+      <div class="flex items-center gap-1 text-[11px] text-slate-400 mt-1">
+        <span class="text-amber-600 font-semibold">Usia Rata-rata</span>
+        <span>keseluruhan pegawai</span>
+      </div>
     </div>`;
 }
 
@@ -44,25 +63,31 @@ function renderPreview(data) {
   const tbody = document.getElementById('previewTable');
   const top5  = data.slice(0, 5);
   if (!top5.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-8 text-center text-slate-400">Belum ada data.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-8 text-center text-slate-400 text-xs">Belum ada data pegawai.</td></tr>';
     return;
   }
   tbody.innerHTML = top5.map(emp => `
-    <tr class="hover:bg-indigo-50 hover:shadow-sm cursor-pointer transition-all duration-200" onclick="window.location.href='/pegawai.html'">
-      <td class="px-6 py-4 text-slate-400 font-mono text-xs">#${emp.id}</td>
-      <td class="px-6 py-4 font-medium text-slate-800">${emp.name}</td>
-      <td class="px-6 py-4">
-        <span class="px-2.5 py-1 rounded-full text-xs font-medium ${emp.gender === 'Laki-laki' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-rose-50 text-rose-700 border border-rose-200'}">
+    <tr class="hover:bg-slate-50/80 cursor-pointer transition-colors" onclick="window.location.href='/pegawai.html'">
+      <td class="px-6 py-3.5 text-slate-400 font-mono text-xs font-medium">#${emp.id}</td>
+      <td class="px-6 py-3.5">
+        <span class="font-semibold text-slate-800 text-sm">${emp.name}</span>
+      </td>
+      <td class="px-6 py-3.5">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${emp.gender === 'Laki-laki' ? 'bg-blue-50 text-blue-700 border border-blue-200/60' : 'bg-rose-50 text-rose-700 border border-rose-200/60'}">
           ${emp.gender}
         </span>
       </td>
-      <td class="px-6 py-4 text-slate-600">${emp.education}</td>
-      <td class="px-6 py-4 text-slate-600">
+      <td class="px-6 py-3.5 text-slate-600 text-xs font-medium">
+        <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200/60">
+          ${emp.education}
+        </span>
+      </td>
+      <td class="px-6 py-3.5 text-slate-600">
         <div class="flex items-center gap-2">
-          <div class="w-16 h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div class="h-full bg-emerald-400 rounded-full" style="width: ${(emp.age / 65) * 100}%"></div>
+          <div class="w-20 h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200/40">
+            <div class="h-full bg-emerald-500 rounded-full" style="width: ${Math.min((emp.age / 60) * 100, 100)}%"></div>
           </div>
-          <span class="text-xs">${emp.age} Thn</span>
+          <span class="text-xs font-medium text-slate-600">${emp.age} Thn</span>
         </div>
       </td>
     </tr>`).join('');
@@ -93,11 +118,11 @@ function renderCharts(data) {
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: { backgroundColor: '#1e293b', padding: 12, cornerRadius: 8, displayColors: false },
+      tooltip: { backgroundColor: '#065f46', padding: 10, cornerRadius: 8, displayColors: false },
     },
     scales: {
-      y: { beginAtZero: true, ticks: { stepSize: 1 }, border: { display: false } },
-      x: { grid: { display: false }, border: { display: false } },
+      y: { beginAtZero: true, ticks: { stepSize: 1, color: '#64748b' }, grid: { color: '#f1f5f9' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { color: '#64748b' }, border: { display: false } },
     },
   };
 
@@ -106,15 +131,15 @@ function renderCharts(data) {
       type: 'bar',
       data: {
         labels,
-        datasets: [{ data: values, backgroundColor: colors, borderRadius: 6, barPercentage: 0.6 }],
+        datasets: [{ data: values, backgroundColor: colors, borderRadius: 6, barPercentage: 0.55 }],
       },
       options: opts,
     });
   }
 
-  genderChart = bar('genderChart', Object.keys(genderCount), Object.values(genderCount), ['#3b82f6', '#f43f5e']);
-  eduChart    = bar('eduChart',    Object.keys(eduCount),    Object.values(eduCount),    '#10b981');
-  ageChart    = bar('ageChart',    Object.keys(ageCount),    Object.values(ageCount),    '#6366f1');
+  genderChart = bar('genderChart', Object.keys(genderCount), Object.values(genderCount), ['#10b981', '#fb7185']);
+  eduChart    = bar('eduChart',    Object.keys(eduCount),    Object.values(eduCount),    ['#34d399', '#059669', '#10b981', '#6ee7b7']);
+  ageChart    = bar('ageChart',    Object.keys(ageCount),    Object.values(ageCount),    '#10b981');
 }
 
 // ── Init ──────────────────────────────────────
